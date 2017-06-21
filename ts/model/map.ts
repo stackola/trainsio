@@ -3,21 +3,20 @@ export default class map {
 	// initialize tiles array
 	sizeX: number;
 	sizeY: number;
-	tiles: Array<Array<tile>>
-	constructor(sx: number, sy: number) {
-		this.tiles = [];
-		this.sizeX = sx;
-		this.sizeY = sy;
-		for (var x: number = 0; x < this.sizeX; x++) {
-			this.tiles[x] = [];
+	tiles: Array < Array < tile >>
+		constructor(sx: number, sy: number) {
+			this.tiles = [];
+			this.sizeX = sx;
+			this.sizeY = sy;
+			for (var x: number = 0; x < this.sizeX; x++) {
+				this.tiles[x] = [];
 
-			for (var y: number = 0; y < this.sizeY; y++) {
-				var t: tile = new tile(x, y);
-				this.tiles[x][y] = t;
+				for (var y: number = 0; y < this.sizeY; y++) {
+					var t: tile = new tile(x, y);
+					this.tiles[x][y] = t;
+				}
 			}
 		}
-	}
-
 
 
 
@@ -36,4 +35,3 @@ export default class map {
 		// map tick, who knows.
 	}.bind(this); // always bind this to functions you want to pass.
 }
-

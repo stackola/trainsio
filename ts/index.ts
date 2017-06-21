@@ -2,10 +2,11 @@ import map from "./model/map";
 import item from "./model/item";
 
 
-var world:map = new map(10, 10);
+var world: map = new map(10, 10);
 
 console.log(world.getString());
-function tick():void {
+
+function tick(): void {
 	world.tick();
 }
 
