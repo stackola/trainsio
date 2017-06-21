@@ -3,7 +3,11 @@
 		"typeRoots": [
 			"node_modules/@types"
 		],
+		"lib":[
+			"ES6"
+		],
 		"outDir": "js",
-		"noImplicitAny":true
+		"noImplicitAny":true,
+		"alwaysStrict":true
 	}
 }

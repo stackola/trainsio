@@ -1,6 +1,7 @@
 export default class item {
-	constructor() {
-
+	name: string;
+	constructor(name: string) {
+		this.name = name;
 	}
 
 	tick = function() {

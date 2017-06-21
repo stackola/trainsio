@@ -12,7 +12,7 @@ export default class map {
 				this.tiles[x] = [];
 
 				for (var y: number = 0; y < this.sizeY; y++) {
-					var t: tile = new tile(x, y);
+					var t: tile = new tile(x, y, this);
 					this.tiles[x][y] = t;
 				}
 			}
@@ -20,7 +20,7 @@ export default class map {
 
 
 
-	getString = function(): string {
+	getString(): string {
 		var str = "Map of size (" + this.sizeX + "x" + this.sizeY + ") \n";
 		for (var x = 0; x < this.sizeX; x++) {
 			for (var y = 0; y < this.sizeY; y++) {
@@ -28,6 +28,24 @@ export default class map {
 			}
 		}
 		return str;
+	}
+
+	getNeighbors(tile: tile): Map < string, tile > {
+		var ret: Map < string, tile >= new Map();
+		if (tile.y - 1 >= 0) {
+			ret.set("left", this.tiles[tile.x][tile.y - 1])
+		}
+		if (tile.y + 1 < this.sizeY) {
+			ret.set("right", this.tiles[tile.x][tile.y + 1])
+		}
+		if (tile.x - 1 >= 0) {
+			ret.set("down", this.tiles[tile.x - 1][tile.y])
+		}
+		if (tile.x + 1 < this.sizeX) {
+			ret.set("up", this.tiles[tile.x + 1][tile.y])
+		}
+
+		return ret;
 	}
 
 	tick = function(): void {
