@@ -30,6 +30,18 @@ export default class map {
 		return str;
 	}
 
+	toSymbols(): string {
+		var str = "Map as symbols:\n"
+		for (var x = this.sizeX - 1; x >= 0; x--) {
+			for (var y = 0; y < this.sizeY; y++) {
+
+				str += this.tiles[x][y].toSymbol();
+			}
+			str += "\n";
+		}
+		return str;
+	}
+
 	getNeighbors(tile: tile): Map < string, tile > {
 		var ret: Map < string, tile >= new Map();
 		if (tile.y - 1 >= 0) {
@@ -49,7 +61,10 @@ export default class map {
 	}
 
 	tick = function(): void {
-		console.log("map tick");
-		// map tick, who knows.
+		for (var x = 0; x < this.sizeX; x++) {
+			for (var y = 0; y < this.sizeY; y++) {
+				this.tiles[x][y].tick();
+			}
+		}
 	}.bind(this); // always bind this to functions you want to pass.
 }

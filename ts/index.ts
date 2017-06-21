@@ -1,19 +1,29 @@
 import map from "./model/map";
 import item from "./model/item";
 import factory from "./model/factory";
+import conveyor from "./model/conveyor";
 
-var world: map = new map(10, 10);
+var world: map = new map(15, 15);
 
 //instantiate items.
 var gold: item = new item("Gold");
 
 var f: factory = new factory(gold, 1, world.tiles[0][0]);
 
-// function tick(): void {
-// 	world.tick();
-// }
+world.tiles[0][1].makeConveyor("right");
+world.tiles[0][2].makeConveyor("right");
+world.tiles[0][3].makeConveyor("up");
 
 
-// setInterval(function() {
-// 	tick();
-// }, 1000 / 10);
+function tick(): void {
+	f.tick();
+	world.tick();
+	console.log(world.toSymbols());
+}
+
+
+setInterval(function() {
+	//console.log("tick");
+	tick();
+
+}, 1000 / 10);

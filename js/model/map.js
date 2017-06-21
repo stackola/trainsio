@@ -4,8 +4,11 @@ var tile_1 = require("./tile");
 var map = (function () {
     function map(sx, sy) {
         this.tick = function () {
-            console.log("map tick");
-            // map tick, who knows.
+            for (var x = 0; x < this.sizeX; x++) {
+                for (var y = 0; y < this.sizeY; y++) {
+                    this.tiles[x][y].tick();
+                }
+            }
         }.bind(this); // always bind this to functions you want to pass.
         this.tiles = [];
         this.sizeX = sx;
@@ -24,6 +27,16 @@ var map = (function () {
             for (var y = 0; y < this.sizeY; y++) {
                 str += this.tiles[x][y].getLocation() + "\n";
             }
+        }
+        return str;
+    };
+    map.prototype.toSymbols = function () {
+        var str = "Map as symbols:\n";
+        for (var x = this.sizeX - 1; x >= 0; x--) {
+            for (var y = 0; y < this.sizeY; y++) {
+                str += this.tiles[x][y].toSymbol();
+            }
+            str += "\n";
         }
         return str;
     };
