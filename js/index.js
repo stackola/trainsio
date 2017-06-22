@@ -6,6 +6,14 @@ var app = require('express')();
 var express = require('express');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+app.use(express.static('public'));
+io.on('connection', function (socket) {
+    console.log('a user connected');
+});
+http.listen(process.env.PORT || 5000, function () {
+    console.log('listening on *:5000');
+});
+//put everything below this line in it's own class.
 var world = new map_1["default"](350, 350, 25);
 //instantiate items.
 var gold = new item_1["default"]("Gold");
@@ -26,5 +34,5 @@ function tick() {
 }
 setInterval(function () {
     //console.log("tick");
-    tick();
+    //tick();
 }, 1000 / 10);

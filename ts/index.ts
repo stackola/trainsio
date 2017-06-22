@@ -1,8 +1,11 @@
+
+
 import map from "./model/map";
 import item from "./model/item";
 import factory from "./model/factory";
 import conveyor from "./model/conveyor";
 import vector from "./model/vector";
+
 
 var app = require('express')();
 var express = require('express');
@@ -12,10 +15,14 @@ var io = require('socket.io')(http);
 
 app.use(express.static('public'));
 
-
-io.on('connection', function(socket){
+io.on('connection', function(socket:SocketIO.Socket){
 	console.log('a user connected');
 });
+
+http.listen(process.env.PORT || 5000, function(){
+	console.log('listening on *:5000');
+});
+
 
 
 //put everything below this line in it's own class.
@@ -51,6 +58,6 @@ function tick(): void {
 
 setInterval(function() {
 	//console.log("tick");
-	tick();
+	//tick();
 
 }, 1000 / 10);
