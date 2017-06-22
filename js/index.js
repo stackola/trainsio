@@ -2,6 +2,10 @@
 exports.__esModule = true;
 var map_1 = require("./model/map");
 var item_1 = require("./model/item");
+var app = require('express')();
+var express = require('express');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 var world = new map_1["default"](350, 350, 25);
 //instantiate items.
 var gold = new item_1["default"]("Gold");
