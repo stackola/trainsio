@@ -99,12 +99,12 @@ export default class chunk {
 
 	toSymbols(): string {
 		var str = "Chunk " + this.x + ":" + this.y + "\n";
-		
-		for (var y: number = this.size - 1; y >=0 ; y--) {
+
+		for (var y: number = this.size - 1; y >= 0; y--) {
 			for (var x: number = 0; x < this.size; x++) {
 				str += this.tiles[x][y].toSymbol();
 			}
-			str+="\n";
+			str += "\n";
 		}
 		return str;
 	}

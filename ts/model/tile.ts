@@ -1,7 +1,9 @@
 import itemStack from "./itemStack";
+import item from "./item";
 import chunk from "./chunk";
 import conveyor from "./conveyor";
 import vector from "./vector";
+import factory from "./factory";
 import localPosition from "./localPosition";
 
 export default class tile {
@@ -9,6 +11,7 @@ export default class tile {
 	itemStack: itemStack | null = null;
 	neighbors: Map < string, tile > | null = null;
 	conveyor: conveyor | null = null;
+	factory: factory | null = null;
 	localPosition: localPosition;
 
 	constructor(x: number, y: number, chunk: chunk) {
@@ -16,6 +19,10 @@ export default class tile {
 		this.localPosition = new localPosition(x, y, chunk);
 
 
+	}
+
+	makeFactory(i: item, l: number) {
+		this.factory = new factory(i, l, this);
 	}
 
 	getNeighbors(): Map < string, tile > {
@@ -110,6 +117,10 @@ export default class tile {
 		return false;
 	}
 	_tick(): void {
+		if (this.factory != null) {
+			this.factory.tick();
+		}
+
 		if (this.itemStack != null) {
 			this.itemStack.tick();
 		}

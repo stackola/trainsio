@@ -2,17 +2,22 @@
 exports.__esModule = true;
 var conveyor_1 = require("./conveyor");
 var vector_1 = require("./vector");
+var factory_1 = require("./factory");
 var localPosition_1 = require("./localPosition");
 var tile = (function () {
     function tile(x, y, chunk) {
         this.itemStack = null;
         this.neighbors = null;
         this.conveyor = null;
+        this.factory = null;
         this.tick = function () {
             this._tick();
         }.bind(this);
         this.localPosition = new localPosition_1["default"](x, y, chunk);
     }
+    tile.prototype.makeFactory = function (i, l) {
+        this.factory = new factory_1["default"](i, l, this);
+    };
     tile.prototype.getNeighbors = function () {
         if (this.neighbors == null) {
             this.neighbors = new Map();
@@ -84,6 +89,9 @@ var tile = (function () {
         return false;
     };
     tile.prototype._tick = function () {
+        if (this.factory != null) {
+            this.factory.tick();
+        }
         if (this.itemStack != null) {
             this.itemStack.tick();
         }
