@@ -1,16 +1,18 @@
 import tile from "./tile";
 import itemStack from "./itemStack";
+import player from "./player";
 
 export default class conveyor {
 
 	inputTile: tile;
 	itemStack: itemStack | null;
 	outputTile: tile | null;
-	totalTicks: number = 5;
+	totalTicks: number;
+	player: player;
 	ticksLeft: number = this.totalTicks;
-	constructor(t: tile, direction: string) {
+	constructor(t: tile, direction: string, totalTicks: number = 5) {
 		this.inputTile = t;
-
+		this.totalTicks=totalTicks;
 		if (this.inputTile.getNeighbors().has(direction)) {
 			this.outputTile = this.inputTile.getNeighbors().get(direction);
 			// console.log("Set output tile to " + this.outputTile.localPosition.getString());
