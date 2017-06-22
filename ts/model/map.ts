@@ -6,10 +6,14 @@ import vector from "./vector";
 export default class map {
 	chunks: Array < Array < chunk >> = [];
 	chunkSize: number;
+	sizeX: number;
+	sizeY: number;
 	constructor(sx: number, sy: number, cs: number) {
 		var countX = Math.floor(sx / cs);
 		var countY = Math.floor(sy / cs);
 		this.chunkSize = cs;
+		this.sizeX = sx;
+		this.sizeY = sy;
 		for (var x = 0; x < countX; ++x) {
 			this.chunks[x] = [];
 			for (var y = 0; y < countY; ++y) {
