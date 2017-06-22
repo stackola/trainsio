@@ -1,6 +1,8 @@
 "use strict";
 exports.__esModule = true;
 var conveyor_1 = require("./conveyor");
+var vector_1 = require("./vector");
+var localPosition_1 = require("./localPosition");
 var tile = (function () {
     function tile(x, y, chunk) {
         this.itemStack = null;
@@ -9,15 +11,62 @@ var tile = (function () {
         this.tick = function () {
             this._tick();
         }.bind(this);
-        this.x = x;
-        this.y = y;
-        this.chunk = chunk;
+        this.localPosition = new localPosition_1["default"](x, y, chunk);
     }
+    tile.prototype.getNeighbors = function () {
+        if (this.neighbors == null) {
+            this.neighbors = new Map();
+            var x = this.localPosition.getGlobal().x;
+            var y = this.localPosition.getGlobal().y;
+            var bottomLeft = new vector_1["default"](x - 1, y - 1);
+            var left = new vector_1["default"](x - 1, y);
+            var topLeft = new vector_1["default"](x - 1, y + 1);
+            var top = new vector_1["default"](x, y + 1);
+            var bottom = new vector_1["default"](x, y - 1);
+            var bottomRight = new vector_1["default"](x + 1, y - 1);
+            var right = new vector_1["default"](x + 1, y);
+            var topRight = new vector_1["default"](x + 1, y + 1);
+            if (this.localPosition.chunk.world.isTile(bottomLeft)) {
+                this.neighbors.set("bottomLeft", this.localPosition.chunk.world.getTileFromGlobal(bottomLeft));
+                console.log("set bottomleft");
+            }
+            if (this.localPosition.chunk.world.isTile(bottomLeft)) {
+                this.neighbors.set("bottomLeft", this.localPosition.chunk.world.getTileFromGlobal(bottomLeft));
+                console.log("added bottomLeft");
+            }
+            if (this.localPosition.chunk.world.isTile(left)) {
+                this.neighbors.set("left", this.localPosition.chunk.world.getTileFromGlobal(left));
+                console.log("added left");
+            }
+            if (this.localPosition.chunk.world.isTile(topLeft)) {
+                this.neighbors.set("topLeft", this.localPosition.chunk.world.getTileFromGlobal(topLeft));
+                console.log("added topLeft");
+            }
+            if (this.localPosition.chunk.world.isTile(top)) {
+                this.neighbors.set("top", this.localPosition.chunk.world.getTileFromGlobal(top));
+                console.log("added top");
+            }
+            if (this.localPosition.chunk.world.isTile(bottom)) {
+                this.neighbors.set("bottom", this.localPosition.chunk.world.getTileFromGlobal(bottom));
+                console.log("added bottom");
+            }
+            if (this.localPosition.chunk.world.isTile(bottomRight)) {
+                this.neighbors.set("bottomRight", this.localPosition.chunk.world.getTileFromGlobal(bottomRight));
+                console.log("added bottomRight");
+            }
+            if (this.localPosition.chunk.world.isTile(right)) {
+                this.neighbors.set("right", this.localPosition.chunk.world.getTileFromGlobal(right));
+                console.log("added right");
+            }
+            if (this.localPosition.chunk.world.isTile(topRight)) {
+                this.neighbors.set("topRight", this.localPosition.chunk.world.getTileFromGlobal(topRight));
+                console.log("added topRight");
+            }
+        }
+        return this.neighbors;
+    };
     tile.prototype.makeConveyor = function (direction) {
         this.conveyor = new conveyor_1["default"](this, direction);
-    };
-    tile.prototype.getLocation = function () {
-        return "Tile (" + this.x + ":" + this.y + ")";
     };
     tile.prototype.toSymbol = function () {
         if (this.itemStack != null || (this.conveyor != null && this.conveyor.itemStack != null)) {

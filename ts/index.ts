@@ -2,8 +2,11 @@ import map from "./model/map";
 import item from "./model/item";
 import factory from "./model/factory";
 import conveyor from "./model/conveyor";
+import vector from "./model/vector";
 
 var world: map = new map(50, 50, 10);
+
+
 
 //instantiate items.
 var gold: item = new item("Gold");
