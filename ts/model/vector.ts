@@ -15,6 +15,9 @@ export default class vector {
 	round():vector{
 		return new vector(Math.floor(this.x), Math.floor(this.y));
 	}
+	toObject():object{
+		return {x:this.x, y:this.y};
+	}
 	tick = function() {
 
 	}.bind(this);

@@ -70,6 +70,8 @@ export default class map {
 		}
 	}
 
+	
+
 	tick = function(): void {
 
 		this._tick();

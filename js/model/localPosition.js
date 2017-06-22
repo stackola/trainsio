@@ -15,6 +15,9 @@ var localPosition = (function () {
     localPosition.prototype.getString = function () {
         return "Chunk (" + this.chunk.x + ":" + this.chunk.y + "). Pos: (" + this.x + ":" + this.y + ")";
     };
+    localPosition.prototype.toObject = function () {
+        return new vector_1["default"](this.x, this.y).toObject();
+    };
     return localPosition;
 }());
 exports["default"] = localPosition;

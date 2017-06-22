@@ -5,9 +5,26 @@
 	<title>Trains.io</title>
 </head>
 <body>
+<button id="posButton">test</button>
+	<script src="/js/jquery.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
+
+
 		var socket = io();
+
+		socket.on('chunkState',function(chunkstate){
+			console.log("chunkstate", chunkstate);
+		});
+
+		$(function(){
+			$('#posButton').click(function(){
+				socket.emit("playerPosition", {x:24, y:24}, function(){
+					console.log("send position to server");
+				});
+			});
+		});
+
 
 	</script>
 </body>

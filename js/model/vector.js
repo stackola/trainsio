@@ -15,6 +15,9 @@ var vector = (function () {
     vector.prototype.round = function () {
         return new vector(Math.floor(this.x), Math.floor(this.y));
     };
+    vector.prototype.toObject = function () {
+        return { x: this.x, y: this.y };
+    };
     return vector;
 }());
 exports["default"] = vector;

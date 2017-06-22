@@ -10,8 +10,10 @@ export default class chunk {
 	tiles: Array < Array < tile >> = [];
 	world: map;
 	neighbors: Map < string, chunk > | null = null;
+	room: string;
 	constructor(x: number, y: number, size: number, world: map) {
 		this.x = x;
+		this.room = x + ":" + y;
 		this.y = y;
 		this.size = size;
 		this.world = world;
@@ -25,7 +27,25 @@ export default class chunk {
 			}
 		}
 	}
+	getGamestate(): object {
+		var tileStates = [];
+		for (var x: number = 0; x < this.size; x++) {
+			for (var y: number = 0; y < this.size; y++) {
+				tileStates.push(this.tiles[x][y].getGamestate());
+			}
+		}
 
+		var obj = {
+			'tiles': tileStates,
+			'position': {
+				x: this.x,
+				y: this.y
+			},
+			'size':this.size
+		};
+
+		return obj;
+	}
 	getNeighbors(): Map < string, chunk > {
 		if (this.neighbors == null) {
 			//need to fill neighbors map

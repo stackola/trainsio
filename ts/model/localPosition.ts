@@ -16,6 +16,9 @@ export default class localPosition {
 	getString(): string {
 		return "Chunk (" + this.chunk.x + ":" + this.chunk.y + "). Pos: (" + this.x + ":" + this.y + ")";
 	}
+	toObject(): object {
+		return new vector(this.x, this.y).toObject();
+	}
 	tick = function() {
 
 	}.bind(this);

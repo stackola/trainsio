@@ -15,6 +15,14 @@ var tile = (function () {
         }.bind(this);
         this.localPosition = new localPosition_1["default"](x, y, chunk);
     }
+    tile.prototype.getGamestate = function () {
+        var obj = {
+            position: this.localPosition.toObject(),
+            hasItem: this.itemStack != null,
+            hasConveyor: this.conveyor != null
+        };
+        return obj;
+    };
     tile.prototype.makeFactory = function (i, l) {
         this.factory = new factory_1["default"](i, l, this);
     };

@@ -10,6 +10,7 @@ var chunk = (function () {
             this._tick();
         }.bind(this);
         this.x = x;
+        this.room = x + ":" + y;
         this.y = y;
         this.size = size;
         this.world = world;
@@ -21,6 +22,23 @@ var chunk = (function () {
             }
         }
     }
+    chunk.prototype.getGamestate = function () {
+        var tileStates = [];
+        for (var x = 0; x < this.size; x++) {
+            for (var y = 0; y < this.size; y++) {
+                tileStates.push(this.tiles[x][y].getGamestate());
+            }
+        }
+        var obj = {
+            'tiles': tileStates,
+            'position': {
+                x: this.x,
+                y: this.y
+            },
+            'size': this.size
+        };
+        return obj;
+    };
     chunk.prototype.getNeighbors = function () {
         if (this.neighbors == null) {
             //need to fill neighbors map

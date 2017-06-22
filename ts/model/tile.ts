@@ -20,7 +20,14 @@ export default class tile {
 
 
 	}
-
+	getGamestate(): object {
+		var obj = {
+			position: this.localPosition.toObject(),
+			hasItem: this.itemStack != null,
+			hasConveyor: this.conveyor != null
+		};
+		return obj;
+	}
 	makeFactory(i: item, l: number) {
 		this.factory = new factory(i, l, this);
 	}
@@ -44,7 +51,7 @@ export default class tile {
 			var right = new vector(x + 1, y);
 			var topRight = new vector(x + 1, y + 1);
 
-			
+
 			if (this.localPosition.chunk.world.isTile(bottomLeft)) {
 				this.neighbors.set("bottomLeft", this.localPosition.chunk.world.getTileFromGlobal(bottomLeft));
 				// console.log("added bottomLeft");

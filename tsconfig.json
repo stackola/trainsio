@@ -7,7 +7,6 @@
 			"ES6"
 		],
 		"outDir": "js",
-		"noImplicitAny":true,
 		"alwaysStrict":true
 	}
 }

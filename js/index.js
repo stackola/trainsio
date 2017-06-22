@@ -9,9 +9,9 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var players = [];
 //put everything below this line in it's own class.
-var sizeX = 100;
-var sizeY = 100;
-var world = new map_1["default"](sizeX, sizeY, 10);
+var sizeX = 25;
+var sizeY = 25;
+var world = new map_1["default"](sizeX, sizeY, 5);
 app.use(express.static('public'));
 io.on('connection', function (socket) {
     console.log('a user connected');
@@ -36,9 +36,32 @@ function tick() {
     console.time('tick');
     world.tick();
     console.timeEnd('tick');
-    console.log(world.chunks[0][0].toSymbols());
+    //console.log(world.chunks[0][0].toSymbols());
+}
+function sendGamestate() {
+    //for each chunk, get the room, and transmit the chunk to the room.
+    var sent = 0;
+    for (var i = 0; i < world.chunks.length; ++i) {
+        for (var j = 0; j < world.chunks[0].length; ++j) {
+            var aChunk = world.chunks[i][j];
+            //see if anyone is in that room.
+            if (typeof io.sockets.adapter.rooms[aChunk.room] != "undefined" && io.sockets.adapter.rooms[aChunk.room].length > 0) {
+                var gs = aChunk.getGamestate();
+                //console.log("gamestate for a chunk");
+                io.to(aChunk.room).emit('chunkState', gs);
+                sent++;
+            }
+            else {
+                //console.log("no one in this room");
+            }
+        }
+    }
+    console.log("Sent messages to " + sent + " rooms.");
 }
 setInterval(function () {
     //console.log("tick");
-    //tick();
+    tick();
+    console.time('sendGamestate');
+    sendGamestate();
+    console.timeEnd('sendGamestate');
 }, 1000 / 10);
