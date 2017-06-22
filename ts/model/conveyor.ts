@@ -13,6 +13,7 @@ export default class conveyor {
 		
 		if (this.inputTile.getNeighbors().has(direction)){
 			this.outputTile = this.inputTile.getNeighbors().get(direction);
+			console.log("Set output tile to "+ this.outputTile.localPosition.getString());
 		}
 		
 

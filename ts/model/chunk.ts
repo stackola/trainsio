@@ -96,6 +96,18 @@ export default class chunk {
 		}
 		return str;
 	}
+
+	toSymbols(): string {
+		var str = "Chunk " + this.x + ":" + this.y + "\n";
+		
+		for (var y: number = this.size - 1; y >=0 ; y--) {
+			for (var x: number = 0; x < this.size; x++) {
+				str += this.tiles[x][y].toSymbol();
+			}
+			str+="\n";
+		}
+		return str;
+	}
 	_tick(): void {
 		for (var i = 0; i < this.tiles.length; ++i) {
 			for (var j = 0; j < this.tiles[0].length; ++j) {

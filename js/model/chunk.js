@@ -77,6 +77,16 @@ var chunk = (function () {
         }
         return str;
     };
+    chunk.prototype.toSymbols = function () {
+        var str = "Chunk " + this.x + ":" + this.y + "\n";
+        for (var y = this.size - 1; y >= 0; y--) {
+            for (var x = 0; x < this.size; x++) {
+                str += this.tiles[x][y].toSymbol();
+            }
+            str += "\n";
+        }
+        return str;
+    };
     chunk.prototype._tick = function () {
         for (var i = 0; i < this.tiles.length; ++i) {
             for (var j = 0; j < this.tiles[0].length; ++j) {

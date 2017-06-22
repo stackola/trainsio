@@ -13,10 +13,11 @@ world.tiles[0][2].makeConveyor("right");
 world.tiles[0][3].makeConveyor("up");
 */
 world.chunks[0][0].tiles[0][1].makeConveyor("right");
+world.chunks[0][0].tiles[1][1].makeConveyor("right");
 function tick() {
     f.tick();
     world.tick();
-    //console.log(world.toSymbols());
+    console.log(world.chunks[0][0].toSymbols());
 }
 setInterval(function () {
     console.log("tick");
