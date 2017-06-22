@@ -4,7 +4,7 @@ import factory from "./model/factory";
 import conveyor from "./model/conveyor";
 import vector from "./model/vector";
 
-var world: map = new map(50, 50, 10);
+var world: map = new map(350, 350, 25);
 
 
 
@@ -21,14 +21,19 @@ world.chunks[0][0].tiles[0][0].makeFactory(gold, 1);
 world.chunks[0][0].tiles[0][1].makeConveyor("right");
 world.chunks[0][0].tiles[1][1].makeConveyor("right");
 
+console.log("done initializing");
+
 function tick(): void {
+	console.time('tick');
 	world.tick();
+	console.timeEnd('tick');
+
 	console.log(world.chunks[0][0].toSymbols());
 }
 
 
 setInterval(function() {
-	console.log("tick");
+	//console.log("tick");
 	tick();
 
 }, 1000 / 10);

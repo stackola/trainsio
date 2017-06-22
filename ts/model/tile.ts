@@ -44,48 +44,43 @@ export default class tile {
 			var right = new vector(x + 1, y);
 			var topRight = new vector(x + 1, y + 1);
 
+			
 			if (this.localPosition.chunk.world.isTile(bottomLeft)) {
 				this.neighbors.set("bottomLeft", this.localPosition.chunk.world.getTileFromGlobal(bottomLeft));
-				console.log("set bottomleft");
-			}
-
-
-			if (this.localPosition.chunk.world.isTile(bottomLeft)) {
-				this.neighbors.set("bottomLeft", this.localPosition.chunk.world.getTileFromGlobal(bottomLeft));
-				console.log("added bottomLeft");
+				// console.log("added bottomLeft");
 			}
 			if (this.localPosition.chunk.world.isTile(left)) {
 				this.neighbors.set("left", this.localPosition.chunk.world.getTileFromGlobal(left));
-				console.log("added left");
+				// console.log("added left");
 			}
 			if (this.localPosition.chunk.world.isTile(topLeft)) {
 				this.neighbors.set("topLeft", this.localPosition.chunk.world.getTileFromGlobal(topLeft));
-				console.log("added topLeft");
+				// console.log("added topLeft");
 			}
 
 
 			if (this.localPosition.chunk.world.isTile(top)) {
 				this.neighbors.set("top", this.localPosition.chunk.world.getTileFromGlobal(top));
-				console.log("added top");
+				// console.log("added top");
 			}
 			if (this.localPosition.chunk.world.isTile(bottom)) {
 				this.neighbors.set("bottom", this.localPosition.chunk.world.getTileFromGlobal(bottom));
-				console.log("added bottom");
+				// console.log("added bottom");
 			}
 
 
 
 			if (this.localPosition.chunk.world.isTile(bottomRight)) {
 				this.neighbors.set("bottomRight", this.localPosition.chunk.world.getTileFromGlobal(bottomRight));
-				console.log("added bottomRight");
+				// console.log("added bottomRight");
 			}
 			if (this.localPosition.chunk.world.isTile(right)) {
 				this.neighbors.set("right", this.localPosition.chunk.world.getTileFromGlobal(right));
-				console.log("added right");
+				// console.log("added right");
 			}
 			if (this.localPosition.chunk.world.isTile(topRight)) {
 				this.neighbors.set("topRight", this.localPosition.chunk.world.getTileFromGlobal(topRight));
-				console.log("added topRight");
+				// console.log("added topRight");
 			}
 
 		}
