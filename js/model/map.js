@@ -6,6 +6,7 @@ var map = (function () {
     function map(sx, sy, cs) {
         this.chunks = [];
         this.tick = function () {
+            this._tick();
         }.bind(this); // always bind this to functions you want to pass.
         var countX = Math.floor(sx / cs);
         var countY = Math.floor(sy / cs);
@@ -51,6 +52,13 @@ var map = (function () {
     };
     map.prototype.isChunk = function (v) {
         return (typeof this.chunks[v.x] != "undefined" && typeof this.chunks[v.x][v.y] != "undefined");
+    };
+    map.prototype._tick = function () {
+        for (var i = 0; i < this.chunks.length; ++i) {
+            for (var j = 0; j < this.chunks[0].length; ++j) {
+                this.chunks[i][j].tick();
+            }
+        }
     };
     return map;
 }());

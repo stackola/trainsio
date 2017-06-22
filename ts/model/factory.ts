@@ -16,9 +16,10 @@ export default class factory {
 	}
 
 	setOutput(): void {
-		//var ns = this.baseTile.getNeighbors();
-		//this.outputTile = ns.values().next().value;
-		// console.log("set factory output tile.");
+		var ns = this.baseTile.getNeighbors();
+		this.outputTile = ns.values().next().value;
+		console.log("set factory output tile."+ this.outputTile.localPosition.getString());
+
 	}
 	_tick(): void {
 		if (this.outputTile.receiveItemStack(new itemStack(this.product, 10))) {

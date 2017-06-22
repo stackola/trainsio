@@ -16,7 +16,7 @@ export default class map {
 				//console.log("making chunk " + x + ":" + y);
 				this.chunks[x][y] = (new chunk(x, y, cs, this));
 			}
-		}	
+		}
 
 	}
 
@@ -33,7 +33,7 @@ export default class map {
 	}
 
 
-	getTileFromGlobal(v:vector):tile{
+	getTileFromGlobal(v: vector): tile {
 		var lp = this.getLocalFromGlobal(v);
 		return lp.chunk.tiles[lp.x][lp.y];
 	}
@@ -56,11 +56,18 @@ export default class map {
 	}
 
 	isChunk(v: vector): boolean {
-		return (typeof this.chunks[v.x] != "undefined"  && typeof this.chunks[v.x][v.y] != "undefined");
+		return (typeof this.chunks[v.x] != "undefined" && typeof this.chunks[v.x][v.y] != "undefined");
 	}
-
+	_tick(): void {
+		for (var i = 0; i < this.chunks.length; ++i) {
+			for (var j = 0; j < this.chunks[0].length; ++j) {
+				this.chunks[i][j].tick();
+			}
+		}
+	}
 
 	tick = function(): void {
 
+		this._tick();
 	}.bind(this); // always bind this to functions you want to pass.
 }

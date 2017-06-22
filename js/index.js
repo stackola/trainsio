@@ -8,16 +8,17 @@ var world = new map_1["default"](50, 50, 10);
 var gold = new item_1["default"]("Gold");
 var f = new factory_1["default"](gold, 1, world.chunks[0][0].tiles[0][0]);
 /*
-world.tiles[0][1].makeConveyor("right");
+
 world.tiles[0][2].makeConveyor("right");
 world.tiles[0][3].makeConveyor("up");
 */
+world.chunks[0][0].tiles[0][1].makeConveyor("right");
 function tick() {
-    //f.tick();
+    f.tick();
     world.tick();
     //console.log(world.toSymbols());
 }
 setInterval(function () {
-    //console.log("tick");
+    console.log("tick");
     tick();
 }, 1000 / 10);

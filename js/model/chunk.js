@@ -7,6 +7,7 @@ var chunk = (function () {
         this.tiles = [];
         this.neighbors = null;
         this.tick = function () {
+            this._tick();
         }.bind(this);
         this.x = x;
         this.y = y;
@@ -75,6 +76,13 @@ var chunk = (function () {
             }
         }
         return str;
+    };
+    chunk.prototype._tick = function () {
+        for (var i = 0; i < this.tiles.length; ++i) {
+            for (var j = 0; j < this.tiles[0].length; ++j) {
+                this.tiles[i][j].tick();
+            }
+        }
     };
     return chunk;
 }());

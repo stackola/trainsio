@@ -12,9 +12,9 @@ var factory = (function () {
         this.setOutput();
     }
     factory.prototype.setOutput = function () {
-        //var ns = this.baseTile.getNeighbors();
-        //this.outputTile = ns.values().next().value;
-        // console.log("set factory output tile.");
+        var ns = this.baseTile.getNeighbors();
+        this.outputTile = ns.values().next().value;
+        console.log("set factory output tile." + this.outputTile.localPosition.getString());
     };
     factory.prototype._tick = function () {
         if (this.outputTile.receiveItemStack(new itemStack_1["default"](this.product, 10))) {
