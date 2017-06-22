@@ -16,8 +16,8 @@ export default class factory {
 	}
 
 	setOutput(): void {
-		var ns = this.baseTile.getNeighbors();
-		this.outputTile = ns.values().next().value;
+		//var ns = this.baseTile.getNeighbors();
+		//this.outputTile = ns.values().next().value;
 		// console.log("set factory output tile.");
 	}
 	_tick(): void {

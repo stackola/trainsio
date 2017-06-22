@@ -12,8 +12,8 @@ var factory = (function () {
         this.setOutput();
     }
     factory.prototype.setOutput = function () {
-        var ns = this.baseTile.getNeighbors();
-        this.outputTile = ns.values().next().value;
+        //var ns = this.baseTile.getNeighbors();
+        //this.outputTile = ns.values().next().value;
         // console.log("set factory output tile.");
     };
     factory.prototype._tick = function () {

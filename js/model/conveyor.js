@@ -8,16 +8,7 @@ var conveyor = (function () {
             this._tick();
         }.bind(this);
         this.inputTile = t;
-        if (this.inputTile.getNeighbors().has(direction)) {
-            this.outputTile = this.inputTile.getNeighbors().get(direction);
-            // console.log("output tile set on conveyor");
-            // console.log(this.outputTile);
-        }
-        else {
-            // console.log(this.inputTile.getNeighbors());
-            this.outputTile = null;
-            // console.log("could not set output tile");
-        }
+        this.outputTile = null;
     }
     conveyor.prototype.pickup = function () {
         if (this.inputTile.itemStack != null) {

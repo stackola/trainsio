@@ -1,18 +1,18 @@
 import itemStack from "./itemStack";
-import map from "./map";
+import chunk from "./chunk";
 import conveyor from "./conveyor";
 export default class tile {
 	x: number;
 	y: number;
 	itemStack: itemStack | null = null;
-	world: map;
+	chunk: chunk;
 	neighbors: Map < string, tile > | null = null;
 	conveyor: conveyor | null = null;
 
-	constructor(x: number, y: number, world: map) {
+	constructor(x: number, y: number, chunk: chunk) {
 		this.x = x;
 		this.y = y;
-		this.world = world;
+		this.chunk = chunk;
 
 	}
 	makeConveyor(direction: string): void {
@@ -30,13 +30,6 @@ export default class tile {
 	}
 
 
-
-	getNeighbors(): Map < string, tile > {
-		if (this.neighbors == null) {
-			this.neighbors = this.world.getNeighbors(this);
-		}
-		return this.neighbors;
-	}
 
 	receiveItemStack(s: itemStack): boolean {
 		if (this.itemStack == null) {

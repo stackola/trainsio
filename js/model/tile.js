@@ -2,7 +2,7 @@
 exports.__esModule = true;
 var conveyor_1 = require("./conveyor");
 var tile = (function () {
-    function tile(x, y, world) {
+    function tile(x, y, chunk) {
         this.itemStack = null;
         this.neighbors = null;
         this.conveyor = null;
@@ -11,7 +11,7 @@ var tile = (function () {
         }.bind(this);
         this.x = x;
         this.y = y;
-        this.world = world;
+        this.chunk = chunk;
     }
     tile.prototype.makeConveyor = function (direction) {
         this.conveyor = new conveyor_1["default"](this, direction);
@@ -24,12 +24,6 @@ var tile = (function () {
             return "0";
         }
         return "O";
-    };
-    tile.prototype.getNeighbors = function () {
-        if (this.neighbors == null) {
-            this.neighbors = this.world.getNeighbors(this);
-        }
-        return this.neighbors;
     };
     tile.prototype.receiveItemStack = function (s) {
         if (this.itemStack == null) {

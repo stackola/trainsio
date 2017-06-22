@@ -10,15 +10,10 @@ export default class conveyor {
 	ticksLeft: number = this.totalTicks;
 	constructor(t: tile, direction: string) {
 		this.inputTile = t;
-		if (this.inputTile.getNeighbors().has(direction)) {
-			this.outputTile = this.inputTile.getNeighbors().get(direction);
-			// console.log("output tile set on conveyor");
-			// console.log(this.outputTile);
-		} else {
-			// console.log(this.inputTile.getNeighbors());
-			this.outputTile = null;
-			// console.log("could not set output tile");
-		}
+		
+		this.outputTile = null;
+
+		
 	}
 	pickup(): boolean {
 		if (this.inputTile.itemStack != null) {
