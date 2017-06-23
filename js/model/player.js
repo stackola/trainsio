@@ -31,6 +31,7 @@ var player = (function () {
             this.socket.leave(r);
             console.log("left room " + r);
         }
+        this.rooms = [];
         this.socket.join(this.chunk.room);
         this.rooms.push(this.chunk.room);
         console.log("joined room " + this.chunk.room);

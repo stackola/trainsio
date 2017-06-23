@@ -14,8 +14,8 @@ var players:Array<player>=[];
 
 
 //put everything below this line in it's own class.
-var sizeX=25;
-var sizeY=25;
+var sizeX=50;
+var sizeY=50;
 
 var world: map = new map(sizeX, sizeY, 5);
 

@@ -3,29 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Trains.io</title>
+	<style>
+	
+	</style>
+
 </head>
 <body>
-<button id="posButton">test</button>
+	<canvas id="canvas" width="600" height="600"></canvas>
+	<button id="posButton">test</button>
 	<script src="/js/jquery.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
-	<script>
-
-
-		var socket = io();
-
-		socket.on('chunkState',function(chunkstate){
-			console.log("chunkstate", chunkstate);
-		});
-
-		$(function(){
-			$('#posButton').click(function(){
-				socket.emit("playerPosition", {x:24, y:24}, function(){
-					console.log("send position to server");
-				});
-			});
-		});
-
-
-	</script>
+	<script src="/js/main.js"></script>
 </body>
 </html>

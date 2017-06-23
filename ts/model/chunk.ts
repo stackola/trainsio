@@ -41,7 +41,8 @@ export default class chunk {
 				x: this.x,
 				y: this.y
 			},
-			'size':this.size
+			'size':this.size,
+			'id':this.x+":"+this.y
 		};
 
 		return obj;
