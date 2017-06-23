@@ -5,6 +5,7 @@ import conveyor from "./conveyor";
 import vector from "./vector";
 import factory from "./factory";
 import localPosition from "./localPosition";
+var shortid = require('shortid');
 
 export default class tile {
 
@@ -13,10 +14,11 @@ export default class tile {
 	conveyor: conveyor | null = null;
 	factory: factory | null = null;
 	localPosition: localPosition;
-
+	shortid: string;
 	constructor(x: number, y: number, chunk: chunk) {
 
 		this.localPosition = new localPosition(x, y, chunk);
+		this.shortid=shortid.generate();
 
 
 	}
@@ -24,7 +26,8 @@ export default class tile {
 		var obj = {
 			position: this.localPosition.toObject(),
 			hasItem: this.itemStack != null,
-			hasConveyor: this.conveyor != null
+			hasConveyor: this.conveyor != null,
+			id:this.shortid
 		};
 		return obj;
 	}

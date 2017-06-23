@@ -10,32 +10,28 @@ var app = require('express')();
 var express = require('express');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var players:Array<player>=[];
+var players: Array < player >= [];
 
 
 //put everything below this line in it's own class.
-var sizeX=50;
-var sizeY=50;
+var sizeX = 50;
+var sizeY = 50;
 
 var world: map = new map(sizeX, sizeY, 5);
 
 
 app.use(express.static('public'));
 
-io.on('connection', function(socket:SocketIO.Socket){
+io.on('connection', function(socket: SocketIO.Socket) {
 	console.log('a user connected');
-	var p:player = new player("NONAME", socket, world);
+	var p: player = new player("NONAME", socket, world);
 	players.push(p);
 
 });
 
-http.listen(process.env.PORT || 5000, function(){
+http.listen(process.env.PORT || 5000, function() {
 	console.log('listening on *:5000');
 });
-
-
-
-
 
 
 
@@ -62,27 +58,25 @@ function tick(): void {
 	//console.log(world.chunks[0][0].toSymbols());
 }
 
-function sendGamestate(){
+function sendGamestate() {
 	//for each chunk, get the room, and transmit the chunk to the room.
-	var sent=0;
+	var sent = 0;
 	for (var i = 0; i < world.chunks.length; ++i) {
 		for (var j = 0; j < world.chunks[0].length; ++j) {
 			var aChunk = world.chunks[i][j];
 			//see if anyone is in that room.
-			if (typeof io.sockets.adapter.rooms[aChunk.room] != "undefined" && io.sockets.adapter.rooms[aChunk.room].length > 0){
-				var gs = aChunk.getGamestate();			
+			if (typeof io.sockets.adapter.rooms[aChunk.room] != "undefined" && io.sockets.adapter.rooms[aChunk.room].length > 0) {
+				var gs = aChunk.getGamestate();
 				//console.log("gamestate for a chunk");
 				io.to(aChunk.room).emit('chunkState', gs);
 				sent++;
-			}
-			else
-			{
+			} else {
 				//console.log("no one in this room");
 			}
-			
+
 		}
 	}
-	console.log("Sent messages to "+sent+" rooms.");
+	console.log("Sent messages to " + sent + " rooms.");
 }
 
 setInterval(function() {

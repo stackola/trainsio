@@ -4,6 +4,7 @@ var conveyor_1 = require("./conveyor");
 var vector_1 = require("./vector");
 var factory_1 = require("./factory");
 var localPosition_1 = require("./localPosition");
+var shortid = require('shortid');
 var tile = (function () {
     function tile(x, y, chunk) {
         this.itemStack = null;
@@ -14,6 +15,7 @@ var tile = (function () {
             this._tick();
         }.bind(this);
         this.localPosition = new localPosition_1["default"](x, y, chunk);
+        this.shortid = shortid.generate();
     }
     tile.prototype.getGamestate = function () {
         var obj = {

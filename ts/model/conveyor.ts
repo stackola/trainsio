@@ -1,7 +1,7 @@
 import tile from "./tile";
 import itemStack from "./itemStack";
 import player from "./player";
-
+var shortid = require('shortid');
 export default class conveyor {
 
 	inputTile: tile;
@@ -10,9 +10,11 @@ export default class conveyor {
 	totalTicks: number;
 	player: player;
 	ticksLeft: number = this.totalTicks;
+	shortid: string;
 	constructor(t: tile, direction: string, totalTicks: number = 5) {
 		this.inputTile = t;
-		this.totalTicks=totalTicks;
+		this.totalTicks = totalTicks;
+		this.shortid = shortid.generate();
 		if (this.inputTile.getNeighbors().has(direction)) {
 			this.outputTile = this.inputTile.getNeighbors().get(direction);
 			// console.log("Set output tile to " + this.outputTile.localPosition.getString());

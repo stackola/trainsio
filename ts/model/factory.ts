@@ -1,18 +1,19 @@
 import item from "./item";
 import tile from "./tile";
 import itemStack from "./itemStack";
-
+var shortid = require('shortid');
 export default class factory {
 	product: item;
 	level: number;
 	baseTile: tile;
 	outputTile: tile;
-
+	shortid:string;
 	constructor(i: item, l: number, t: tile) {
 		this.product = i;
 		this.level = l;
 		this.baseTile = t;
 		this.setOutput();
+		this.shortid = shortid.generate();
 	}
 
 	setOutput(): void {
