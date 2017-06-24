@@ -1,11 +1,6 @@
 class Chunk {
-	constructor() {
-
-	}
-
-	receiveChunk() {
-
-	}
+	constructor(obj:any) {
+	}	
 }
 
 export = Chunk;

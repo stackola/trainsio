@@ -8,10 +8,15 @@ class SocketManager {
 		this.gsm = gsm;
 		this.socket = s.connect();
 		this.socket.on("connect", this.connect.bind(this));
+		this.socket.on("chunkState", this.chunkState.bind(this));
 	}
 	connect(): void {
 		console.log("socket connected");
 		console.log(this.name);
+	}
+	chunkState(cs: object): void {
+
+		this.gsm.receiveChunk(cs);
 	}
 
 
