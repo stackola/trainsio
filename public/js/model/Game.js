@@ -17,7 +17,7 @@ define(["require", "exports", "./InputManager.js"], function (require, exports, 
             this.renderer = new this.THREE.WebGLRenderer();
             var ASPECT = WIDTH / HEIGHT;
             this.camera = new this.THREE.OrthographicCamera(-ASPECT * 5, ASPECT * 5, 5, -5, 0.1, 20000);
-            this.camera.zoom = 2;
+            this.camera.zoom = 1;
             this.camera.position.z = 10;
             this.camera.updateProjectionMatrix();
             this.scene = new this.THREE.Scene();
@@ -38,11 +38,18 @@ define(["require", "exports", "./InputManager.js"], function (require, exports, 
             // DOM element.
             var container = document.querySelector('#container');
             container.appendChild(this.renderer.domElement);
-            var inputManager = new InputManager(this.renderer.domElement);
+            var inputManager = new InputManager(this.renderer.domElement, this);
             this.renderer.render(this.scene, this.camera);
         };
+        Game.prototype.moveCam = function (v) {
+            console.log("moving cam maybe", v);
+            this.camera.position.add(new this.THREE.Vector3(-v.x / 50 * 1 / this.camera.zoom, v.y / 50 * 1 / this.camera.zoom, 0));
+        };
+        Game.prototype.binaryZoom = function (d) {
+            this.camera.zoom += d * 0.2;
+            this.camera.updateProjectionMatrix();
+        };
         Game.prototype._tick = function () {
-            //this.camera.position.add(new this.THREE.Vector3(0, 0.01, 0));
             this.renderer.render(this.scene, this.camera);
         };
         return Game;

@@ -28,7 +28,7 @@ class Game {
 
 		var ASPECT = WIDTH / HEIGHT;
 		this.camera = new this.THREE.OrthographicCamera(-ASPECT * 5, ASPECT * 5, 5, -5, 0.1, 20000);
-		this.camera.zoom = 2;
+		this.camera.zoom = 1;
 		this.camera.position.z = 10;
 		this.camera.updateProjectionMatrix();
 		
@@ -61,13 +61,21 @@ class Game {
 		var container =
 		document.querySelector('#container');
 		container.appendChild(this.renderer.domElement);
-		var inputManager = new InputManager(this.renderer.domElement);
+		var inputManager = new InputManager(this.renderer.domElement, this);
 
 		this.renderer.render(this.scene, this.camera);
 
 	}
+	moveCam(v:Vector): void{
+		console.log("moving cam maybe", v);
+		this.camera.position.add(new this.THREE.Vector3(-v.x/50*1/this.camera.zoom, v.y/50*1/this.camera.zoom, 0));
+	}
+	binaryZoom(d:number): void{
+		this.camera.zoom+=d*0.2;
+		this.camera.updateProjectionMatrix();
+	}
 	_tick(): void {
-		//this.camera.position.add(new this.THREE.Vector3(0, 0.01, 0));
+	
 		this.renderer.render(this.scene, this.camera);
 	}
 
