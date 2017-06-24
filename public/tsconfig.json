@@ -11,7 +11,8 @@
 		//"out":"../js/compiled.js",
 		"module":"amd",
 		"outDir": "js",
-		"alwaysStrict":true
+		"alwaysStrict":true,
+		"target":"ES5"
 
 	}
 }
