@@ -1,4 +1,3 @@
-
 import Game = require("./Game.js");
 requirejs([
 		'/js/Game.js',
@@ -7,24 +6,26 @@ requirejs([
 		'/js/SocketManager.js',
 		'/js/GameStateManager.js'
 	],
-	function(		
+	function(
 		_Game,
 		Vector,
 		sockets,
 		SocketManager,
 		GameStateManager
-		) {
+	) {
 
 		console.log("loaded");
-		var s:SocketIOClient.Socket = sockets;
 
 
-		var g: Game = new _Game();	//the game DOM object kind of
-		var gsm = new GameStateManager(g);	//the gamestatemanager, receives socket stuff, outputs gameobject onto game possibly?
+
+		var gsm = new GameStateManager(); //the gamestatemanager, receives socket stuff, outputs gameobject onto game possibly?
+		var g: Game = new _Game(gsm); //the game DOM object kind of
+
+		var s: SocketIOClient.Socket = sockets;
 		var socketManager = new SocketManager(s, gsm); // talks to the server.
 
-		g.init(new Vector(2000,2000));
+		g.init(new Vector(2000, 2000));
 
-	
+
 
 	});

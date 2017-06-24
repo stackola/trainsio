@@ -1,7 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     var Game = (function () {
-        function Game() {
+        function Game(gsm) {
             this.preload = function () {
             }.bind(this);
             this.create = function () {
@@ -15,6 +15,7 @@ define(["require", "exports"], function (require, exports) {
             this.render = function () {
                 this.game.debug.cameraInfo(this.game.camera, 32, 32);
             }.bind(this);
+            this.gsm = gsm;
         }
         Game.prototype.init = function (mapSize) {
             this.size = mapSize;

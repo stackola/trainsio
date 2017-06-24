@@ -9,9 +9,9 @@ define(["require", "exports"], function (require, exports) {
         '/js/GameStateManager.js'
     ], function (_Game, Vector, sockets, SocketManager, GameStateManager) {
         console.log("loaded");
+        var gsm = new GameStateManager(); //the gamestatemanager, receives socket stuff, outputs gameobject onto game possibly?
+        var g = new _Game(gsm); //the game DOM object kind of
         var s = sockets;
-        var g = new _Game(); //the game DOM object kind of
-        var gsm = new GameStateManager(g); //the gamestatemanager, receives socket stuff, outputs gameobject onto game possibly?
         var socketManager = new SocketManager(s, gsm); // talks to the server.
         g.init(new Vector(2000, 2000));
     });

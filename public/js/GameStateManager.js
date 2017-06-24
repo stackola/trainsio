@@ -1,9 +1,10 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     var GameStateManager = (function () {
-        function GameStateManager(g) {
-            this.g = g;
+        function GameStateManager() {
         }
+        GameStateManager.prototype.receiveChunk = function () {
+        };
         return GameStateManager;
     }());
     return GameStateManager;

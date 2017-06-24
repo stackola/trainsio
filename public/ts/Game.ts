@@ -1,9 +1,12 @@
 import Vector = require("./model/Vector.js");
+import GameStateManager = require("./GameStateManager");
+
 class Game {
 	game: Phaser.Game;
 	size: Vector;
-	constructor() {
-
+	gsm: GameStateManager;
+	constructor(gsm: GameStateManager) {
+		this.gsm = gsm;
 	}
 
 	init(mapSize: Vector): void {
