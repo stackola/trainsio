@@ -16,16 +16,7 @@ define(["require", "exports"], function (require, exports) {
             return new Vector(Math.floor(this.x), Math.floor(this.y));
         };
         Vector.prototype.toObject = function () {
-            return {
-                x: this.x,
-                y: this.y
-            };
-        };
-        Vector.prototype.difference = function (v2) {
-            return new Vector(v2.x - this.x, v2.y - this.y);
-        };
-        Vector.prototype.length = function () {
-            return Math.sqrt(this.x * this.x + this.y * this.y);
+            return { x: this.x, y: this.y };
         };
         return Vector;
     }());

@@ -7,10 +7,9 @@ define(["require", "exports"], function (require, exports) {
         '/socket.io/socket.io.js',
         '/js/model/SocketManager.js',
         '/js/model/GameStateManager.js',
-        '/js/model/InputManager.js',
         '/js/model/Chunk.js',
         '/js/vendor/three.js',
-    ], function (_Game, Vector, sockets, SocketManager, GameStateManager, InputManager, Chunk, THREE) {
+    ], function (_Game, Vector, sockets, SocketManager, GameStateManager, Chunk, THREE) {
         console.log("loaded");
         //the gamestatemanager, receives socket stuff, outputs gameobject onto game possibly?
         var g = new _Game(THREE); //the game DOM object kind of
@@ -18,10 +17,5 @@ define(["require", "exports"], function (require, exports) {
         var gsm = new GameStateManager(g);
         var s = sockets;
         var socketManager = new SocketManager(s, gsm); // talks to the server.
-        function gameLoop() {
-            requestAnimationFrame(gameLoop);
-            g.tick();
-        }
-        gameLoop();
     });
 });
