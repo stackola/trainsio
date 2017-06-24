@@ -19,6 +19,7 @@ export default class player {
 		this.gold = 1000;
 		this.socket = s;
 		this.rooms = [];
+		this.position = new vector(24,24);
 		this.shortid = shortid.generate();
 		var v = new vector(0, 0);
 		//v.randomize(world.sizeX, world.sizeY);
@@ -35,26 +36,36 @@ export default class player {
 	}
 
 	setPosition(v: vector) {
+		var oldTile = this.world.getTileFromGlobal(this.position.round());
+		var oldChunk = oldTile.localPosition.chunk;
+
 		this.position = v;
+
 		this.tile = this.world.getTileFromGlobal(this.position.round());
 		this.chunk = this.tile.localPosition.chunk;
 
 		//subscribe to own chunk
+		// check if user changed chunk.
+		if (oldChunk != this.chunk) {
+			console.log("user moved to new chunk");
+			for (var r of this.rooms) {
+				this.socket.leave(r);
+				console.log("left room " + r);
+			}
+			this.rooms = [];
+			this.socket.join(this.chunk.room);
+			this.rooms.push(this.chunk.room);
+			console.log("joined room " + this.chunk.room);
 
-		for (var r of this.rooms) {
-			this.socket.leave(r);
-			console.log("left room " + r);
+			this.chunk.getNeighbors().forEach(function(value: chunk) {
+				this.socket.join(value.room);
+				this.rooms.push(value.room);
+				console.log("joined room " + value.room);
+			}.bind(this));
+		} else {
+			console.log("user stayed in chunk");
 		}
-		this.rooms = [];
-		this.socket.join(this.chunk.room);
-		this.rooms.push(this.chunk.room);
-		console.log("joined room " + this.chunk.room);
 
-		this.chunk.getNeighbors().forEach(function(value: chunk) {
-			this.socket.join(value.room);
-			this.rooms.push(value.room);
-			console.log("joined room " + value.room);
-		}.bind(this));
 		//subscribe to all neighbors chunks room.
 		console.log(this.tile.localPosition.getString());
 

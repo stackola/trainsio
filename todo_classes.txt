@@ -1,0 +1,47 @@
+game state classes:
+
+map
+	chunks
+
+chunk
+	id
+	x
+	y
+	size
+	updated:date
+	drawn:date
+	invalid:bool
+	Phaser:group
+
+factory
+	id
+	type
+	level
+	item?
+	progress?
+	outputTile
+	phaser:graphics
+	tile
+
+conveyor
+	id
+	inputTile
+	direction
+	progress
+	itemStack
+	phaser:graphics
+	tile
+
+tile
+	phaser:graphics
+	id
+	position
+
+
+itemStack
+	id
+	type
+	count
+	position/tile?
+
+receiver?

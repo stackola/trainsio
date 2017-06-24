@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var shortid = require('shortid');
 var conveyor = (function () {
     function conveyor(t, direction, totalTicks) {
         if (totalTicks === void 0) { totalTicks = 5; }
@@ -9,6 +10,7 @@ var conveyor = (function () {
         }.bind(this);
         this.inputTile = t;
         this.totalTicks = totalTicks;
+        this.shortid = shortid.generate();
         if (this.inputTile.getNeighbors().has(direction)) {
             this.outputTile = this.inputTile.getNeighbors().get(direction);
             // console.log("Set output tile to " + this.outputTile.localPosition.getString());

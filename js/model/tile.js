@@ -21,7 +21,8 @@ var tile = (function () {
         var obj = {
             position: this.localPosition.toObject(),
             hasItem: this.itemStack != null,
-            hasConveyor: this.conveyor != null
+            hasConveyor: this.conveyor != null,
+            id: this.shortid
         };
         return obj;
     };

@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"typeRoots": [
+			"../node_modules/@types",
+			"../node_modules/@develephant/types-phaser"
+		],
+		"lib":[	
+			"ES5",
+			"dom"
+		],
+		//"out":"../js/compiled.js",
+		"module":"amd",
+		"outDir": "js",
+		"alwaysStrict":true
+
+	}
+}

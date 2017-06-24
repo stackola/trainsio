@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var itemStack_1 = require("./itemStack");
+var shortid = require('shortid');
 var factory = (function () {
     function factory(i, l, t) {
         this.tick = function () {
@@ -10,6 +11,7 @@ var factory = (function () {
         this.level = l;
         this.baseTile = t;
         this.setOutput();
+        this.shortid = shortid.generate();
     }
     factory.prototype.setOutput = function () {
         var ns = this.baseTile.getNeighbors();
