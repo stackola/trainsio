@@ -73,7 +73,6 @@ export default class map {
 	
 
 	tick = function(): void {
-
 		this._tick();
 	}.bind(this); // always bind this to functions you want to pass.
 }

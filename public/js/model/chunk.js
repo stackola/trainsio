@@ -18,7 +18,10 @@ define(["require", "exports", "./Tile.js"], function (require, exports, Tile) {
                 this.tiles.push(new Tile(obj.tiles[i], this));
             }
         }
-        Chunk.prototype.update = function () {
+        Chunk.prototype.update = function (obj) {
+            for (var i = 0; i < obj.tiles.length; ++i) {
+                this.tiles[i].update(obj.tiles[i]);
+            }
         };
         return Chunk;
     }());

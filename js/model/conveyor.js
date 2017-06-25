@@ -3,12 +3,12 @@ exports.__esModule = true;
 var shortid = require('shortid');
 var conveyor = (function () {
     function conveyor(t, direction, totalTicks) {
-        if (totalTicks === void 0) { totalTicks = 5; }
-        this.ticksLeft = this.totalTicks;
+        if (totalTicks === void 0) { totalTicks = 20; }
         this.tick = function () {
             this._tick();
         }.bind(this);
         this.inputTile = t;
+        this.ticksLeft = totalTicks;
         this.totalTicks = totalTicks;
         this.shortid = shortid.generate();
         if (this.inputTile.getNeighbors().has(direction)) {
@@ -16,11 +16,19 @@ var conveyor = (function () {
             // console.log("Set output tile to " + this.outputTile.localPosition.getString());
         }
     }
+    conveyor.prototype.getGamestate = function () {
+        var obj = {
+            totalTicks: this.totalTicks,
+            ticksLeft: this.ticksLeft,
+            hasItem: this.itemStack != null
+        };
+        return obj;
+    };
     conveyor.prototype.pickup = function () {
         if (this.inputTile.itemStack != null) {
             this.itemStack = this.inputTile.itemStack;
             this.inputTile.itemStack = null;
-            // console.log("Conv. picked up item from " + this.inputTile.localPosition.getString());
+            console.log("Conv. picked up item from " + this.inputTile.localPosition.getString());
             return true;
         }
         else {
@@ -37,7 +45,7 @@ var conveyor = (function () {
                 this.ticksLeft = this.totalTicks;
                 // console.log("Conveyor done moving! looking to dropoff");
                 if (this.outputTile != null && this.outputTile.receiveItemStack(this.itemStack) == true) {
-                    // console.log(this.outputTile.localPosition.getString() + " accepted the itemstack");
+                    console.log(this.outputTile.localPosition.getString() + " accepted the itemstack");
                     this.itemStack = null;
                 }
                 else {

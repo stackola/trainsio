@@ -17,7 +17,7 @@ define(["require", "exports", "./Chunk.js"], function (require, exports, Chunk) 
             }
             else {
                 //console.log("old chunk update stuff");
-                search[0].chunk.update();
+                search[0].chunk.update(chunk);
             }
         };
         return GameStateManager;

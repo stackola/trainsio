@@ -27,12 +27,18 @@ export default class tile {
 			position: this.localPosition.toObject(),
 			hasItem: this.itemStack != null,
 			hasConveyor: this.conveyor != null,
+			hasFactory: this.factory != null,
 			id:this.shortid
 		};
+
+		if (this.conveyor != null){
+			obj["conveyor"]=this.conveyor.getGamestate();
+		}
 		return obj;
 	}
 	makeFactory(i: item, l: number) {
 		this.factory = new factory(i, l, this);
+		console.log("made factory!");
 	}
 
 	getNeighbors(): Map < string, tile > {

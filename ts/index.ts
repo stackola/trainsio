@@ -47,6 +47,13 @@ world.tiles[0][3].makeConveyor("up");
 world.chunks[0][0].tiles[0][0].makeFactory(gold, 1);
 world.chunks[0][0].tiles[0][1].makeConveyor("right");
 world.chunks[0][0].tiles[1][1].makeConveyor("right");
+world.chunks[0][0].tiles[2][1].makeConveyor("right");
+world.chunks[0][0].tiles[3][1].makeConveyor("right");
+world.chunks[0][0].tiles[4][1].makeConveyor("right");
+world.chunks[0][0].tiles[5][1].makeConveyor("right");
+world.chunks[0][0].tiles[6][1].makeConveyor("right");
+world.chunks[0][0].tiles[7][1].makeConveyor("right");
+world.chunks[0][0].tiles[8][1].makeConveyor("right");
 
 console.log("done initializing");
 

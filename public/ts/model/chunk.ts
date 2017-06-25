@@ -34,8 +34,10 @@ class Chunk {
 		}
 
 	}
-	update():void{
-		
+	update(obj:any):void{
+		for (var i = 0; i < obj.tiles.length; ++i) {
+			this.tiles[i].update(obj.tiles[i]);
+		}
 	}
 
 

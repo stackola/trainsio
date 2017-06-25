@@ -24,7 +24,7 @@ class GameStateManager {
 		}
 		else{
 			//console.log("old chunk update stuff");
-			search[0].chunk.update();
+			search[0].chunk.update(chunk);
 		}
 	}
 

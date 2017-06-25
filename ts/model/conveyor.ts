@@ -9,10 +9,11 @@ export default class conveyor {
 	outputTile: tile | null;
 	totalTicks: number;
 	player: player;
-	ticksLeft: number = this.totalTicks;
+	ticksLeft: number;
 	shortid: string;
-	constructor(t: tile, direction: string, totalTicks: number = 5) {
+	constructor(t: tile, direction: string, totalTicks: number = 20) {
 		this.inputTile = t;
+		this.ticksLeft = totalTicks;
 		this.totalTicks = totalTicks;
 		this.shortid = shortid.generate();
 		if (this.inputTile.getNeighbors().has(direction)) {
@@ -23,11 +24,20 @@ export default class conveyor {
 
 
 	}
+
+	getGamestate(): object {
+		var obj = {
+			totalTicks:this.totalTicks,
+			ticksLeft:this.ticksLeft,
+			hasItem:this.itemStack!=null
+		};
+		return obj;
+	}
 	pickup(): boolean {
 		if (this.inputTile.itemStack != null) {
 			this.itemStack = this.inputTile.itemStack;
 			this.inputTile.itemStack = null;
-			// console.log("Conv. picked up item from " + this.inputTile.localPosition.getString());
+			 console.log("Conv. picked up item from " + this.inputTile.localPosition.getString());
 			return true;
 		} else {
 			// console.log("Conv. trid picking up item from " + this.inputTile.localPosition.getString() + ", but tile was empty.");
@@ -45,7 +55,7 @@ export default class conveyor {
 				this.ticksLeft = this.totalTicks;
 				// console.log("Conveyor done moving! looking to dropoff");
 				if (this.outputTile != null && this.outputTile.receiveItemStack(this.itemStack) == true) {
-					// console.log(this.outputTile.localPosition.getString() + " accepted the itemstack");
+					console.log(this.outputTile.localPosition.getString() + " accepted the itemstack");
 					this.itemStack = null;
 				} else {
 					// console.log("tile has not accepted the item stack. trying again next tick");

@@ -22,12 +22,17 @@ var tile = (function () {
             position: this.localPosition.toObject(),
             hasItem: this.itemStack != null,
             hasConveyor: this.conveyor != null,
+            hasFactory: this.factory != null,
             id: this.shortid
         };
+        if (this.conveyor != null) {
+            obj["conveyor"] = this.conveyor.getGamestate();
+        }
         return obj;
     };
     tile.prototype.makeFactory = function (i, l) {
         this.factory = new factory_1["default"](i, l, this);
+        console.log("made factory!");
     };
     tile.prototype.getNeighbors = function () {
         if (this.neighbors == null) {
