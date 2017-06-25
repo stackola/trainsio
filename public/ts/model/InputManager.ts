@@ -21,7 +21,7 @@ class InputManager {
 	wheel(evt): void{
 		var evt = window.event || evt; // old IE support
 		var delta = Math.max(-1, Math.min(1, (evt.wheelDelta || -evt.detail)));
-		console.log(delta);
+		//console.log(delta);
 		this.game.binaryZoom(delta);
 	}
 	mouseDown(evt): void {
@@ -48,11 +48,11 @@ class InputManager {
 			if (this.actuallyDragging || difference.length() > 10) {
 				var moveSinceLastFrame = this.lastPosition.difference(mousePos);
 				this.actuallyDragging = true;
-				console.log("dragging actually", moveSinceLastFrame);
+				//console.log("dragging actually", moveSinceLastFrame);
 				this.game.moveCam(moveSinceLastFrame);
 
 			}
-			console.log(difference.length());
+			//console.log(difference.length());
 			this.lastPosition = new Vector(mousePos.x, mousePos.y);
 
 		}

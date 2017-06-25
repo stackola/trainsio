@@ -8,6 +8,7 @@ exports.default =  requirejs([
 	'/js/model/GameStateManager.js',
 	'/js/model/InputManager.js',
 	'/js/model/Chunk.js',
+	'/js/model/Tile.js',
 	'/js/vendor/three.js',
 	],
 	function(
@@ -18,6 +19,7 @@ exports.default =  requirejs([
 		GameStateManager,
 		InputManager,
 		Chunk,
+		Tile,
 		THREE
 		) {
 
@@ -31,6 +33,7 @@ exports.default =  requirejs([
 		var gsm:GameStateManager = new GameStateManager(g);
 		var s: SocketIOClient.Socket = sockets;
 		var socketManager = new SocketManager(s, gsm); // talks to the server.
+		g.setSocketManager(socketManager);
 	
 
 		function gameLoop(){

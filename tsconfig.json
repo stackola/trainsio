@@ -4,7 +4,7 @@
 			"node_modules/@types"
 		],
 		"lib":[
-			
+			"ES6",
 			"dom"
 		],
 		"outDir": "js",

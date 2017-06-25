@@ -15,6 +15,9 @@ define(["require", "exports"], function (require, exports) {
         SocketManager.prototype.chunkState = function (cs) {
             this.gsm.receiveChunk(cs);
         };
+        SocketManager.prototype.playerPosition = function (v) {
+            this.socket.emit("playerPosition", v.toObject());
+        };
         return SocketManager;
     }());
     return SocketManager;

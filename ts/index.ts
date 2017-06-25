@@ -14,10 +14,10 @@ var players: Array < player >= [];
 
 
 //put everything below this line in it's own class.
-var sizeX = 50;
-var sizeY = 50;
+var sizeX = 500;
+var sizeY = 500;
 
-var world: map = new map(sizeX, sizeY, 5);
+var world: map = new map(sizeX, sizeY, 25);
 
 
 app.use(express.static('public'));

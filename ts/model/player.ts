@@ -7,27 +7,35 @@ export default class player {
 	name: string;
 	gold: number;
 	socket: SocketIO.Socket;
-	position: vector;
+	position: vector|null = null;
 	chunk: chunk | null = null;
 	world: map;
 	tile: tile;
 	rooms: Array < string > ;
 	shortid: string;
+
 	constructor(name: string, s: SocketIO.Socket, world: map) {
 		this.name = name;
 		this.world = world;
 		this.gold = 1000;
 		this.socket = s;
 		this.rooms = [];
-		this.position = new vector(24,24);
+		
 		this.shortid = shortid.generate();
 		var v = new vector(0, 0);
 		//v.randomize(world.sizeX, world.sizeY);
 		this.setPosition(v);
 
 		this.socket.on("playerPosition", function(data) {
-			this.setPosition(new vector(data.x, data.y));
-			console.log("received position data from player");
+
+			if (data.x > 0 && data.y > 0 ){
+				if (data.x < this.world.sizeX &&  data.y < this.world.sizeY){
+					this.setPosition(new vector(data.x, data.y));
+					console.log("received position data from player");
+				}
+
+			}
+
 		}.bind(this));
 	}
 
@@ -36,6 +44,15 @@ export default class player {
 	}
 
 	setPosition(v: vector) {
+		var firstTime=false;
+		if (this.position == null){
+			this.position = v;
+
+			this.tile = this.world.getTileFromGlobal(this.position.round());
+			this.chunk = this.tile.localPosition.chunk;
+			firstTime=true;
+		}
+
 		var oldTile = this.world.getTileFromGlobal(this.position.round());
 		var oldChunk = oldTile.localPosition.chunk;
 
@@ -44,9 +61,11 @@ export default class player {
 		this.tile = this.world.getTileFromGlobal(this.position.round());
 		this.chunk = this.tile.localPosition.chunk;
 
+
 		//subscribe to own chunk
 		// check if user changed chunk.
-		if (oldChunk != this.chunk) {
+		if (firstTime || oldChunk != this.chunk) {
+
 			console.log("user moved to new chunk");
 			for (var r of this.rooms) {
 				this.socket.leave(r);

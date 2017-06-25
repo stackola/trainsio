@@ -1,4 +1,5 @@
 import GameStateManager = require("./GameStateManager");
+import Vector = require("./Vector");
 class SocketManager {
 	socket: SocketIOClient.Socket;
 	name: string = "okay";
@@ -15,8 +16,11 @@ class SocketManager {
 		console.log(this.name);
 	}
 	chunkState(cs: object): void {
-
 		this.gsm.receiveChunk(cs);
+	}
+
+	playerPosition(v: Vector):void{
+		this.socket.emit("playerPosition", v.toObject());
 	}
 
 
