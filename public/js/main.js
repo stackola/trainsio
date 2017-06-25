@@ -10,8 +10,9 @@ define(["require", "exports"], function (require, exports) {
         '/js/model/InputManager.js',
         '/js/model/Chunk.js',
         '/js/model/Tile.js',
+        '/js/model/Conveyor.js',
         '/js/vendor/three.js',
-    ], function (_Game, Vector, sockets, SocketManager, GameStateManager, InputManager, Chunk, Tile, THREE) {
+    ], function (_Game, Vector, sockets, SocketManager, GameStateManager, InputManager, Chunk, Tile, Conveyor, THREE) {
         console.log("loaded");
         //the gamestatemanager, receives socket stuff, outputs gameobject onto game possibly?
         var g = new _Game(THREE); //the game DOM object kind of

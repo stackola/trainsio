@@ -30,7 +30,9 @@ export default class tile {
 			hasFactory: this.factory != null,
 			id:this.shortid
 		};
-
+		if (obj.hasItem){
+			obj["item"]=this.itemStack.getGamestate();
+		}
 		if (this.conveyor != null){
 			obj["conveyor"]=this.conveyor.getGamestate();
 		}

@@ -9,6 +9,14 @@ var itemStack = (function () {
         this.count = c;
         this.shortid = shortid.generate();
     }
+    itemStack.prototype.getGamestate = function () {
+        var obj = {
+            name: this.item.name,
+            conut: this.count,
+            id: this.shortid
+        };
+        return obj;
+    };
     return itemStack;
 }());
 exports["default"] = itemStack;

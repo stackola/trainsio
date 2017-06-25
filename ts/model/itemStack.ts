@@ -10,6 +10,15 @@ export default class itemStack {
 		this.shortid = shortid.generate();
 	}
 
+	getGamestate(): object {
+		var obj = {
+			name:this.item.name,
+			conut:this.count,
+			id:this.shortid		
+		};
+		return obj;
+	}
+
 	tick = function() {
 
 	}.bind(this);

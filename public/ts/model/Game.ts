@@ -55,6 +55,7 @@ class Game {
 		this.scene.add(new this.THREE.AxisHelper(5));
 		this.renderer.setSize(WIDTH, HEIGHT);
 
+
 		// Attach the renderer-supplied
 		// DOM element.
 		var container =

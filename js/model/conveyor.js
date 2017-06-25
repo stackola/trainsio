@@ -11,6 +11,7 @@ var conveyor = (function () {
         this.ticksLeft = totalTicks;
         this.totalTicks = totalTicks;
         this.shortid = shortid.generate();
+        this.direction = direction;
         if (this.inputTile.getNeighbors().has(direction)) {
             this.outputTile = this.inputTile.getNeighbors().get(direction);
             // console.log("Set output tile to " + this.outputTile.localPosition.getString());
@@ -20,8 +21,12 @@ var conveyor = (function () {
         var obj = {
             totalTicks: this.totalTicks,
             ticksLeft: this.ticksLeft,
-            hasItem: this.itemStack != null
+            hasItem: this.itemStack != null,
+            direction: this.direction
         };
+        if (obj.hasItem) {
+            obj["item"] = this.itemStack.getGamestate();
+        }
         return obj;
     };
     conveyor.prototype.pickup = function () {

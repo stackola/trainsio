@@ -9,6 +9,7 @@ exports.default =  requirejs([
 	'/js/model/InputManager.js',
 	'/js/model/Chunk.js',
 	'/js/model/Tile.js',
+	'/js/model/Conveyor.js',
 	'/js/vendor/three.js',
 	],
 	function(
@@ -20,6 +21,7 @@ exports.default =  requirejs([
 		InputManager,
 		Chunk,
 		Tile,
+		Conveyor,
 		THREE
 		) {
 
@@ -38,7 +40,6 @@ exports.default =  requirejs([
 
 		function gameLoop(){
 			requestAnimationFrame(gameLoop);
-
 			g.tick();
 		}
 		
