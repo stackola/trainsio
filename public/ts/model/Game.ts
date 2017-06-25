@@ -1,6 +1,8 @@
 import Vector = require("./Vector.js");
 import InputManager = require("./InputManager.js");
 import SocketManager = require("./SocketManager.js");
+import ItemManager = require("./ItemManager.js");
+import ItemStack = require("./ItemStack.js");
 
 
 
@@ -12,9 +14,11 @@ class Game {
 	renderer: THREE.WebGLRenderer;
 	floor: THREE.Mesh;
 	socketManger: SocketManager;
-
+	itemManager: ItemManager;
 	constructor(t: any) {
 		this.THREE = t;
+		this.itemManager=new ItemManager(this);
+		
 	}
 
 	setSocketManager(sm: SocketManager): void {
@@ -64,6 +68,14 @@ class Game {
 		var inputManager = new InputManager(this.renderer.domElement, this);
 
 		this.renderer.render(this.scene, this.camera);
+
+		console.log("creating item named JAJA");
+		this.itemManager.add(new ItemStack({id: 'JAJA', count:12, name:"gold"},new Vector(0,0), this.itemManager));
+		console.log(this.itemManager.has("JAJA"));
+		
+
+
+
 
 	}
 	moveCam(v: Vector): void {

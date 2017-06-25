@@ -13,7 +13,7 @@ export default class itemStack {
 	getGamestate(): object {
 		var obj = {
 			name:this.item.name,
-			conut:this.count,
+			count:this.count,
 			id:this.shortid		
 		};
 		return obj;

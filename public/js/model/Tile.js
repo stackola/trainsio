@@ -1,4 +1,4 @@
-define(["require", "exports", "./Vector.js", "./Conveyor.js"], function (require, exports, Vector, Conveyor) {
+define(["require", "exports", "./Vector.js", "./Conveyor.js", "./ItemStack.js"], function (require, exports, Vector, Conveyor, ItemStack) {
     "use strict";
     var Tile = (function () {
         function Tile(obj, chunk) {
@@ -13,6 +13,19 @@ define(["require", "exports", "./Vector.js", "./Conveyor.js"], function (require
             if (obj.hasConveyor) {
                 this.conveyor = new Conveyor(this, obj.conveyor);
             }
+            else if (obj.hasItem) {
+                if (this.chunk.game.itemManager.has(obj.item.id)) {
+                    console.log("item in itemmanager");
+                }
+                else {
+                    console.log("creating itemstack");
+                    this.chunk.game.itemManager.add(new ItemStack({
+                        id: obj.item.id,
+                        count: 12,
+                        name: "gold"
+                    }, this.toWorldPosition(), this.chunk.game.itemManager));
+                }
+            }
             else {
                 var geometry = new this.chunk.game.THREE.CubeGeometry(1, 1, 1);
                 geometry.scale(0.9, 0.9, 0.9);
@@ -22,30 +35,35 @@ define(["require", "exports", "./Vector.js", "./Conveyor.js"], function (require
                 });
             }
         }
+        Tile.prototype.toWorldPosition = function () {
+            var x = this.position.x + this.chunk.position.x;
+            var y = this.position.y + this.chunk.position.y;
+            var v = new Vector(x, y);
+            console.log("world pos", v);
+            return v;
+        };
         Tile.prototype.update = function (obj) {
-            // if (obj.hasItem) {
-            // 	this.gameObject.material = new this.chunk.game.THREE.MeshBasicMaterial({
-            // 		color: 0x00FFFF
-            // 	});
-            // }
-            // else
-            // {
-            // 	if (obj.hasConveyor) {
-            // 		this.gameObject.material = new this.chunk.game.THREE.MeshBasicMaterial({
-            // 			color: 0x00FF00
-            // 		});
-            // 		if (obj.conveyor.hasItem) {
-            // 			this.gameObject.material = new this.chunk.game.THREE.MeshBasicMaterial({
-            // 				color: 0x00FFFF
-            // 			});
-            // 		}
-            // 	}
-            // 	if (obj.hasFactory) {
-            // 		this.gameObject.material = new this.chunk.game.THREE.MeshBasicMaterial({
-            // 			color: 0x0000FF
-            // 		});
-            // 	}
-            // }
+            if (obj.hasConveyor && this.conveyor == null) {
+                this.conveyor = new Conveyor(this, obj.conveyor);
+            }
+            if (this.conveyor != null) {
+                this.conveyor.update(obj.conveyor);
+            }
+            if (obj.hasItem) {
+                if (this.chunk.game.itemManager.has(obj.item.id)) {
+                    console.log("item in itemmanager, should update");
+                    var is = this.chunk.game.itemManager.get(obj.item.id);
+                    is.update(obj.item, this.toWorldPosition());
+                }
+                else {
+                    console.log("creating itemstack");
+                    this.chunk.game.itemManager.add(new ItemStack({
+                        id: obj.item.id,
+                        count: 12,
+                        name: "gold"
+                    }, this.toWorldPosition(), this.chunk.game.itemManager));
+                }
+            }
         };
         return Tile;
     }());

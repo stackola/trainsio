@@ -21,6 +21,7 @@ var conveyor = (function () {
         var obj = {
             totalTicks: this.totalTicks,
             ticksLeft: this.ticksLeft,
+            progress: this.ticksLeft / this.totalTicks,
             hasItem: this.itemStack != null,
             direction: this.direction
         };

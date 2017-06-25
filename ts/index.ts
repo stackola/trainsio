@@ -53,7 +53,10 @@ world.chunks[0][0].tiles[4][1].makeConveyor("right");
 world.chunks[0][0].tiles[5][1].makeConveyor("right");
 world.chunks[0][0].tiles[6][1].makeConveyor("right");
 world.chunks[0][0].tiles[7][1].makeConveyor("right");
-world.chunks[0][0].tiles[8][1].makeConveyor("right");
+world.chunks[0][0].tiles[8][1].makeConveyor("top");
+world.chunks[0][0].tiles[8][2].makeConveyor("top");
+world.chunks[0][0].tiles[8][3].makeConveyor("top");
+world.chunks[0][0].tiles[8][4].makeConveyor("top");
 
 console.log("done initializing");
 

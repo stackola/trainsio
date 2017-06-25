@@ -1,4 +1,4 @@
-define(["require", "exports", "./Vector.js", "./InputManager.js"], function (require, exports, Vector, InputManager) {
+define(["require", "exports", "./Vector.js", "./InputManager.js", "./ItemManager.js", "./ItemStack.js"], function (require, exports, Vector, InputManager, ItemManager, ItemStack) {
     "use strict";
     var Game = (function () {
         function Game(t) {
@@ -6,6 +6,7 @@ define(["require", "exports", "./Vector.js", "./InputManager.js"], function (req
                 this._tick();
             }.bind(this);
             this.THREE = t;
+            this.itemManager = new ItemManager(this);
         }
         Game.prototype.setSocketManager = function (sm) {
             this.socketManger = sm;
@@ -41,6 +42,9 @@ define(["require", "exports", "./Vector.js", "./InputManager.js"], function (req
             container.appendChild(this.renderer.domElement);
             var inputManager = new InputManager(this.renderer.domElement, this);
             this.renderer.render(this.scene, this.camera);
+            console.log("creating item named JAJA");
+            this.itemManager.add(new ItemStack({ id: 'JAJA', count: 12, name: "gold" }, new Vector(0, 0), this.itemManager));
+            console.log(this.itemManager.has("JAJA"));
         };
         Game.prototype.moveCam = function (v) {
             //console.log("moving cam maybe", v);

@@ -12,7 +12,7 @@ var itemStack = (function () {
     itemStack.prototype.getGamestate = function () {
         var obj = {
             name: this.item.name,
-            conut: this.count,
+            count: this.count,
             id: this.shortid
         };
         return obj;

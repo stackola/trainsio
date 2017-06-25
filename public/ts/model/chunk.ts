@@ -1,5 +1,6 @@
 import Game = require("./Game.js");
 import Tile = require("./Tile.js");
+import Vector = require("./Vector.js");
 
 class Chunk {
 	created: Date | null = null;
@@ -7,6 +8,8 @@ class Chunk {
 	game: Game;
 	gameObject: THREE.Mesh;
 	tiles: Array<Tile>=[];
+	size:number;
+	position:Vector;
 	constructor(obj: {
 		position: {
 			x: number,
@@ -21,6 +24,10 @@ class Chunk {
 		var now = new Date();
 		this.created = now;
 		this.updated = now;
+		this.size=obj.size;
+		this.position = new Vector(0,0);
+		this.position.x = obj.position.x * this.size;
+		this.position.y = obj.position.x * this.size;
 
 		
 		this.gameObject = new this.game.THREE.Mesh();

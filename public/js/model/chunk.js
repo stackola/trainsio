@@ -1,4 +1,4 @@
-define(["require", "exports", "./Tile.js"], function (require, exports, Tile) {
+define(["require", "exports", "./Tile.js", "./Vector.js"], function (require, exports, Tile, Vector) {
     "use strict";
     var Chunk = (function () {
         function Chunk(obj, game) {
@@ -10,6 +10,10 @@ define(["require", "exports", "./Tile.js"], function (require, exports, Tile) {
             var now = new Date();
             this.created = now;
             this.updated = now;
+            this.size = obj.size;
+            this.position = new Vector(0, 0);
+            this.position.x = obj.position.x * this.size;
+            this.position.y = obj.position.x * this.size;
             this.gameObject = new this.game.THREE.Mesh();
             this.gameObject.translateX(obj.position.x * obj.size);
             this.gameObject.translateY(obj.position.y * obj.size);
