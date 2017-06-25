@@ -9,9 +9,10 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var players = [];
 //put everything below this line in it's own class.
-var sizeX = 500;
-var sizeY = 500;
-var world = new map_1["default"](sizeX, sizeY, 25);
+var sizeX = 150;
+var sizeY = 150;
+var chunkSize = 15;
+var world = new map_1["default"](sizeX, sizeY, chunkSize);
 app.use(express.static('public'));
 io.on('connection', function (socket) {
     console.log('a user connected');

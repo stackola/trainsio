@@ -13,7 +13,7 @@ export default class chunk {
 	room: string;
 	constructor(x: number, y: number, size: number, world: map) {
 		this.x = x;
-		this.room = x + ":" + y;
+		this.room = x.toString() + ":" + y.toString();
 		this.y = y;
 		this.size = size;
 		this.world = world;

@@ -31,7 +31,7 @@ export default class player {
 			if (data.x > 0 && data.y > 0 ){
 				if (data.x < this.world.sizeX &&  data.y < this.world.sizeY){
 					this.setPosition(new vector(data.x, data.y));
-					console.log("received position data from player");
+					//console.log("received position data from player");
 				}
 
 			}
@@ -67,9 +67,22 @@ export default class player {
 		if (firstTime || oldChunk != this.chunk) {
 
 			console.log("user moved to new chunk");
+			var ns = []; 
+			console.log("new chunks rooms");
+			this.chunk.getNeighbors().forEach(function(value:chunk){
+				ns.push(value.room);
+				console.log(value.room);
+			});
 			for (var r of this.rooms) {
-				this.socket.leave(r);
-				console.log("left room " + r);
+				if (ns.indexOf(r) == -1 && r != this.chunk.room){
+					this.socket.leave(r);
+					console.log("left room " + r);
+				}
+				else
+				{
+					console.log("staying in room i guess" + r);
+				}
+				
 			}
 			this.rooms = [];
 			this.socket.join(this.chunk.room);
@@ -78,15 +91,20 @@ export default class player {
 
 			this.chunk.getNeighbors().forEach(function(value: chunk) {
 				this.socket.join(value.room);
+				this.socket.join(value.room);
+				this.socket.join(value.room);
+				this.socket.join(value.room);
 				this.rooms.push(value.room);
 				console.log("joined room " + value.room);
 			}.bind(this));
+
+			console.log("USER IS IN "+ this.rooms.length+ " ROOMS");
 		} else {
-			console.log("user stayed in chunk");
+			//console.log("user stayed in chunk");
 		}
 
-		//subscribe to all neighbors chunks room.
-		console.log(this.tile.localPosition.getString());
+		
+		//console.log(this.tile.localPosition.getString());
 
 	}
 

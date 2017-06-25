@@ -14,10 +14,10 @@ var players: Array < player >= [];
 
 
 //put everything below this line in it's own class.
-var sizeX = 500;
-var sizeY = 500;
-
-var world: map = new map(sizeX, sizeY, 25);
+var sizeX = 150;
+var sizeY = 150;
+var chunkSize = 15;
+var world: map = new map(sizeX, sizeY, chunkSize);
 
 
 app.use(express.static('public'));
@@ -70,6 +70,7 @@ function sendGamestate() {
 				//console.log("gamestate for a chunk");
 				io.to(aChunk.room).emit('chunkState', gs);
 				sent++;
+		
 			} else {
 				//console.log("no one in this room");
 			}
@@ -86,4 +87,4 @@ setInterval(function() {
 	sendGamestate();
 	console.timeEnd('sendGamestate');
 
-}, 1000 / 10);
+}, 1000 / 10 );

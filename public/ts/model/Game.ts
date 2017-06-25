@@ -27,7 +27,7 @@ class Game {
 
 		var WIDTH = 640;
 		var HEIGHT = 480;
-		var chunkSize = 25;
+		var chunkSize = 15;
 		// Set some camera attributes.
 		// Create a WebGL renderer, camera
 		// and a scene
@@ -46,8 +46,8 @@ class Game {
 		// var light = new this.THREE.PointLight(0xffffff);
 		// light.position.set(-100, 200, 100);
 		this.floor = new this.THREE.Mesh();
-		this.floor.translateX(chunkSize / 2);
-		this.floor.translateY(chunkSize / 2);
+		// this.floor.translateX(chunkSize / 2);
+		// this.floor.translateY(chunkSize / 2);
 
 		this.scene.add(this.camera);
 		this.scene.add(this.floor);

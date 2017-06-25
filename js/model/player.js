@@ -21,7 +21,7 @@ var player = (function () {
             if (data.x > 0 && data.y > 0) {
                 if (data.x < this.world.sizeX && data.y < this.world.sizeY) {
                     this.setPosition(new vector_1["default"](data.x, data.y));
-                    console.log("received position data from player");
+                    //console.log("received position data from player");
                 }
             }
         }.bind(this));
@@ -45,10 +45,21 @@ var player = (function () {
         // check if user changed chunk.
         if (firstTime || oldChunk != this.chunk) {
             console.log("user moved to new chunk");
+            var ns = [];
+            console.log("new chunks rooms");
+            this.chunk.getNeighbors().forEach(function (value) {
+                ns.push(value.room);
+                console.log(value.room);
+            });
             for (var _i = 0, _a = this.rooms; _i < _a.length; _i++) {
                 var r = _a[_i];
-                this.socket.leave(r);
-                console.log("left room " + r);
+                if (ns.indexOf(r) == -1 && r != this.chunk.room) {
+                    this.socket.leave(r);
+                    console.log("left room " + r);
+                }
+                else {
+                    console.log("staying in room i guess" + r);
+                }
             }
             this.rooms = [];
             this.socket.join(this.chunk.room);
@@ -56,15 +67,18 @@ var player = (function () {
             console.log("joined room " + this.chunk.room);
             this.chunk.getNeighbors().forEach(function (value) {
                 this.socket.join(value.room);
+                this.socket.join(value.room);
+                this.socket.join(value.room);
+                this.socket.join(value.room);
                 this.rooms.push(value.room);
                 console.log("joined room " + value.room);
             }.bind(this));
+            console.log("USER IS IN " + this.rooms.length + " ROOMS");
         }
         else {
-            console.log("user stayed in chunk");
+            //console.log("user stayed in chunk");
         }
-        //subscribe to all neighbors chunks room.
-        console.log(this.tile.localPosition.getString());
+        //console.log(this.tile.localPosition.getString());
     };
     return player;
 }());

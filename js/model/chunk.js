@@ -10,7 +10,7 @@ var chunk = (function () {
             this._tick();
         }.bind(this);
         this.x = x;
-        this.room = x + ":" + y;
+        this.room = x.toString() + ":" + y.toString();
         this.y = y;
         this.size = size;
         this.world = world;
