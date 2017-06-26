@@ -50,7 +50,7 @@ class Tile {
 		var y = this.position.y + this.chunk.position.y;
 
 		var v = new Vector(x, y);
-		console.log("world pos", v);
+		//console.log("world pos", v);
 		return v;
 	}
 
@@ -65,11 +65,11 @@ class Tile {
 
 		if (obj.hasItem) {
 			if (this.chunk.game.itemManager.has(obj.item.id)) {
-				console.log("item in itemmanager, should update");
+				//console.log("item in itemmanager, should update");
 				var is = this.chunk.game.itemManager.get(obj.item.id);
 				is.update(obj.item, this.toWorldPosition());
 			} else {
-				console.log("creating itemstack");
+				//console.log("creating itemstack");
 				this.chunk.game.itemManager.add(new ItemStack({
 					id: obj.item.id,
 					count: 12,

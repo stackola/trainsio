@@ -32,8 +32,8 @@ class ItemManager {
 			id: is.id,
 			item: is
 		});
-		console.log("added obj"+is.id);
-		console.log(this.items);
+		//console.log("added obj"+is.id);
+		//console.log(this.items);
 	}
 }
 
