@@ -4,99 +4,28 @@ import factory from "./model/factory";
 import conveyor from "./model/conveyor";
 import vector from "./model/vector";
 import player from "./model/player";
+import game from "./game";
 
 
 var app = require('express')();
 var express = require('express');
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var players: Array < player >= [];
-
-
-//put everything below this line in it's own class.
-var sizeX = 150;
-var sizeY = 150;
-var chunkSize = 15;
-var world: map = new map(sizeX, sizeY, chunkSize);
-
-
-app.use(express.static('public'));
-
-io.on('connection', function(socket: SocketIO.Socket) {
-	console.log('a user connected');
-	var p: player = new player("NONAME", socket, world);
-	players.push(p);
-
-});
-
 http.listen(process.env.PORT || 5000, function() {
 	console.log('listening on *:5000');
 });
+app.use(express.static('public'));
+var io = require('socket.io')(http);
+
+
+var g = new game("a game", io, 150, 150, 15);
+var g2 = new game("a game", io, 150, 150, 15);
 
 
 
-//instantiate items.
-var gold: item = new item("Gold");
-
-
-/*
-
-world.tiles[0][2].makeConveyor("right");
-world.tiles[0][3].makeConveyor("up");
-*/
-world.chunks[0][0].tiles[0][0].makeFactory(gold, 1);
-world.chunks[0][0].tiles[0][1].makeConveyor("right");
-world.chunks[0][0].tiles[1][1].makeConveyor("right");
-world.chunks[0][0].tiles[2][1].makeConveyor("right");
-world.chunks[0][0].tiles[3][1].makeConveyor("right");
-world.chunks[0][0].tiles[4][1].makeConveyor("right");
-world.chunks[0][0].tiles[5][1].makeConveyor("right");
-world.chunks[0][0].tiles[6][1].makeConveyor("right");
-world.chunks[0][0].tiles[7][1].makeConveyor("right");
-world.chunks[0][0].tiles[8][1].makeConveyor("top");
-world.chunks[0][0].tiles[8][2].makeConveyor("top");
-world.chunks[0][0].tiles[8][3].makeConveyor("top");
-world.chunks[0][0].tiles[8][4].makeConveyor("left");
-world.chunks[0][0].tiles[7][4].makeConveyor("left");
-world.chunks[0][0].tiles[6][4].makeConveyor("bottom");
-
-console.log("done initializing");
-
-
-function tick(): void {
-	console.time('tick');
-	world.tick();
-	console.timeEnd('tick');
-	//console.log(world.chunks[0][0].toSymbols());
-}
-
-function sendGamestate() {
-	//for each chunk, get the room, and transmit the chunk to the room.
-	var sent = 0;
-	for (var i = 0; i < world.chunks.length; ++i) {
-		for (var j = 0; j < world.chunks[0].length; ++j) {
-			var aChunk = world.chunks[i][j];
-			//see if anyone is in that room.
-			if (typeof io.sockets.adapter.rooms[aChunk.room] != "undefined" && io.sockets.adapter.rooms[aChunk.room].length > 0) {
-				var gs = aChunk.getGamestate();
-				//console.log("gamestate for a chunk");
-				io.to(aChunk.room).emit('chunkState', gs);
-				sent++;
-		
-			} else {
-				//console.log("no one in this room");
-			}
-
-		}
-	}
-	console.log("Sent messages to " + sent + " rooms.");
-}
 
 setInterval(function() {
 	//console.log("tick");
-	tick();
-	console.time('sendGamestate');
-	sendGamestate();
-	console.timeEnd('sendGamestate');
+	g.tick();
+	g2.tick();
 
 }, 1000 / 10 );
