@@ -37,7 +37,7 @@ exports.default =  requirejs([
 		g.init(new Vector(2000, 2000));
 
 		var gsm:GameStateManager = new GameStateManager(g);
-		var s: SocketIOClient.Socket = sockets("/B13OGc0mb");
+		var s: SocketIOClient.Socket = sockets("/H1rnm5Am-");
 		var socketManager = new SocketManager(s, gsm); // talks to the server.
 		g.setSocketManager(socketManager);
 	

@@ -15,11 +15,12 @@ export default class game {
 	sizeY: number;
 	chunkSize: number;
 	world:map;
+	name:string;
 	constructor(name: string, io, sizeX:number, sizeY:number, chunkSize:number) {	
 		this.shortid = shortid.generate();
 		var ss:SocketIO.Namespace = io.of('/'+this.shortid);
 		this.socket=ss;
-		
+		this.name=name;
 		this.sizeX=sizeX;
 		this.sizeY=sizeY;
 		this.chunkSize = chunkSize;
@@ -54,6 +55,8 @@ export default class game {
 		this.world.chunks[0][0].tiles[8][4].makeConveyor("left");
 		this.world.chunks[0][0].tiles[7][4].makeConveyor("left");
 		this.world.chunks[0][0].tiles[6][4].makeConveyor("bottom");
+		
+
 	}
 
 	_tick(): void {

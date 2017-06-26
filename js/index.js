@@ -10,9 +10,9 @@ http.listen(process.env.PORT || 5000, function () {
 app.use(express.static('public'));
 var io = require('socket.io')(http);
 var g = new game_1["default"]("a game", io, 150, 150, 15);
-var g2 = new game_1["default"]("a game", io, 150, 150, 15);
 setInterval(function () {
     //console.log("tick");
+    console.time("allTick");
     g.tick();
-    g2.tick();
+    console.timeEnd("allTick");
 }, 1000 / 10);

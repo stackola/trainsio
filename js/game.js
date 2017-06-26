@@ -13,6 +13,7 @@ var game = (function () {
         this.shortid = shortid.generate();
         var ss = io.of('/' + this.shortid);
         this.socket = ss;
+        this.name = name;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.chunkSize = chunkSize;

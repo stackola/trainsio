@@ -20,7 +20,7 @@ define(["require", "exports"], function (require, exports) {
         var g = new _Game(THREE); //the game DOM object kind of
         g.init(new Vector(2000, 2000));
         var gsm = new GameStateManager(g);
-        var s = sockets("/B13OGc0mb");
+        var s = sockets("/H1rnm5Am-");
         var socketManager = new SocketManager(s, gsm); // talks to the server.
         g.setSocketManager(socketManager);
         function gameLoop() {
